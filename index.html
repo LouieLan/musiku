@@ -486,7 +486,7 @@ html,body{
 </div>
 
 <!-- HIDDEN FILE INPUT -->
-<input type="file" id="fileInput" accept="audio/*" multiple style="display:none" onchange="handleFiles(this.files)">
+<input type="file" id="fileInput" accept=".mp3,.m4a,.aac,.wav,.flac,.ogg,.opus,.wma,.aiff,.mp4,audio/*" multiple style="display:none" onchange="handleFiles(this.files)">
 
 <script>
 // ─── STATE ───────────────────────────────────────────
@@ -582,7 +582,7 @@ async function handleFiles(files) {
   const arr = Array.from(files);
   let added = 0;
   for (const f of arr) {
-    if (!f.type.startsWith('audio/')) continue;
+    if (!f.type.startsWith('audio/') && !f.type.startsWith('video/mp4') && !f.name.match(/\.(mp3|m4a|aac|wav|flac|ogg|opus|wma|aiff|mp4)$/i)) continue;
     const id = f.name + '_' + f.size + '_' + f.lastModified;
     const exists = library.some(t => t.id === id);
     if (exists) continue;
